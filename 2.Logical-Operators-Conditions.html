@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Logical Operators and Conditions &#8212; Dataframes, Indices and Subsetting</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=3c74b3bc" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/test.css?v=90b7ad94" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=fab101a9"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '2.Logical-Operators-Conditions';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Data frames" href="3.Data-Frames.html" />
+    <link rel="prev" title="Vectors and Indices" href="1.Vectors-Indices.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="0.intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="Dataframes, Indices and Subsetting - Home"/>
+    <img src="_static/logo.png" class="logo__image only-dark pst-js-only" alt="Dataframes, Indices and Subsetting - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="0.intro.html">
+                    Introduction: Dataframes Indices & Subsetting
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="1.Vectors-Indices.html">Vectors and Indices</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Logical Operators and Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="3.Data-Frames.html">Data frames</a></li>
+<li class="toctree-l1"><a class="reference internal" href="4.Selecting-Rows-Columns.html">Selecting rows and columns</a></li>
+<li class="toctree-l1"><a class="reference internal" href="5.Subsetting.html">Subsetting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="summary.html">Summary</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/PCHN63101-Exploring-Modelling-Data/Dataframes-Indices-Subsetting" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/PCHN63101-Exploring-Modelling-Data/Dataframes-Indices-Subsetting/issues/new?title=Issue%20on%20page%20%2F2.Logical-Operators-Conditions.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/2.Logical-Operators-Conditions.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button pst-navbar-icon"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm pst-navbar-icon" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Logical Operators and Conditions</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logic-as-a-filter">Logic as a filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="logical-operators-and-conditions">
+<h1>Logical Operators and Conditions<a class="headerlink" href="#logical-operators-and-conditions" title="Link to this heading">#</a></h1>
+<p>We often want to extract values according to a criterion or threshold rather than their position. Suppose that rainfall below 10 units is considered a drought. Were there any such months in our <code class="docutils literal notranslate"><span class="pre">rainfall</span></code> vector?</p>
+<p>We can test this using the less-than operator, <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rainfall</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [1] FALSE FALSE FALSE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE FALSE
+</pre></div>
+</div>
+<p>The result is a logical vector containing one <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> or <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> value for each element of <code class="docutils literal notranslate"><span class="pre">rainfall</span></code>. Each value indicates whether the corresponding rainfall value is less than 10.</p>
+<p>There are four <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> values, so four months had rainfall below 10.</p>
+<p>Logical values can also be coerced to numbers in R: <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> becomes <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> becomes <code class="docutils literal notranslate"><span class="pre">0</span></code>. This means we can count the number of <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> values using <code class="docutils literal notranslate"><span class="pre">sum()</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">sum</span><span class="p">(</span><span class="n">rainfall</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] 4
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When writing code with operators such as <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">-</span></code>, <code class="docutils literal notranslate"><span class="pre">/</span></code>, and <code class="docutils literal notranslate"><span class="pre">&lt;</span></code>, place a space on either side of the operator. R does not require these spaces, but using them consistently makes code easier to read.</p>
+</div>
+<section id="logical-operators">
+<h2>Logical operators<a class="headerlink" href="#logical-operators" title="Link to this heading">#</a></h2>
+<p>R provides several logical operators and comparison operators:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Operator</p></th>
+<th class="head"><p>Meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&amp;</span></code></p></td>
+<td><p>AND</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">|</span></code></p></td>
+<td><p>OR</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">!</span></code></p></td>
+<td><p>NOT</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">==</span></code></p></td>
+<td><p>Equal to</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;</span></code></p></td>
+<td><p>Less than</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;</span></code></p></td>
+<td><p>Greater than</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span></code></p></td>
+<td><p>Less than or equal to</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span></code></p></td>
+<td><p>Greater than or equal to</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>When you use <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> or <code class="docutils literal notranslate"><span class="pre">|</span></code> with vectors, R checks the conditions one position at a time. For each position, <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> returns <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> only when both conditions are <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, while <code class="docutils literal notranslate"><span class="pre">|</span></code> returns <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> when at least one condition is <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>.</p>
+<p>Suppose we want to identify rainfall values below 10 <strong>or</strong> above 13:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">rainfall</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">rainfall</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">13</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE TRUE FALSE  TRUE  TRUE FALSE
+</pre></div>
+</div>
+<p>The result is a logical vector with one value for each element of rainfall indicating whether that value is less than 10 or greater than 13.</p>
+<p>Suppose we wanted to identify people of working age, let’s say 18 or over and less than 67. Let’s first create a vector of ages:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">16</span><span class="p">,</span><span class="w"> </span><span class="m">19</span><span class="p">,</span><span class="w"> </span><span class="m">15</span><span class="p">,</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="m">18</span><span class="p">,</span><span class="w"> </span><span class="m">25</span><span class="p">,</span><span class="w"> </span><span class="m">32</span><span class="p">,</span><span class="w"> </span><span class="m">45</span><span class="p">,</span><span class="w"> </span><span class="m">68</span><span class="p">,</span><span class="w"> </span><span class="m">71</span><span class="p">,</span><span class="w"> </span><span class="m">67</span><span class="p">,</span><span class="w"> </span><span class="m">66</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">ages</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] 16 19 15 18 18 25 32 45 68 71 67 66
+</pre></div>
+</div>
+<p>Note that I have used the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function which simply prints whatever object you give it to the console. We could also have just typed <code class="docutils literal notranslate"><span class="pre">ages</span></code> into the console and got the same effect, but using <code class="docutils literal notranslate"><span class="pre">print()</span></code> hopefully makes it a little easier for you to follow the code. As ever, there’s more than one way of doing things.</p>
+<p>Now let’s see which elements of the <code class="docutils literal notranslate"><span class="pre">ages</span></code> vector meet our criteria:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">ages</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">67</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [1] FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE TRUE FALSE FALSE FALSE  TRUE
+</pre></div>
+</div>
+<p>The condition is evaluated element by element. For an element to produce <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, both comparisons must be <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>.</p>
+<p>You cannot write the condition as:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">67</span>
+</pre></div>
+</div>
+<p>Although this is understandable in English, it is incomplete in R. After <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>, R needs another complete comparison. It does not assume that <code class="docutils literal notranslate"><span class="pre">&lt;</span> <span class="pre">67</span></code> refers to <code class="docutils literal notranslate"><span class="pre">ages</span></code>; the object being compared must be stated explicitly.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using equality comparisons, be careful to use <code class="docutils literal notranslate"><span class="pre">==</span></code>, not <code class="docutils literal notranslate"><span class="pre">=</span></code>.</p>
+<p>The operator <code class="docutils literal notranslate"><span class="pre">==</span></code> tests whether two values are equal. The operator <code class="docutils literal notranslate"><span class="pre">=</span></code> is primarily used for assignment, just like <code class="docutils literal notranslate"><span class="pre">&lt;-</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">16</span>
+<span class="n">age</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">18</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] FALSE
+</pre></div>
+</div>
+<p>This works as intended. We first assign the value <code class="docutils literal notranslate"><span class="pre">16</span></code> to <code class="docutils literal notranslate"><span class="pre">age</span></code>, then ask whether <code class="docutils literal notranslate"><span class="pre">age</span></code> is equal to <code class="docutils literal notranslate"><span class="pre">18</span></code>. R returns <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>.</p>
+<p>If we use <code class="docutils literal notranslate"><span class="pre">=</span></code> instead of <code class="docutils literal notranslate"><span class="pre">==</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">age</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">16</span>
+<span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">18</span>
+</pre></div>
+</div>
+<p>R assigns the value <code class="docutils literal notranslate"><span class="pre">18</span></code> to <code class="docutils literal notranslate"><span class="pre">age</span></code>. It does not compare the two values. Assignments do not normally produce visible output in the console, but we can check the value of <code class="docutils literal notranslate"><span class="pre">age</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">print</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] 18
+</pre></div>
+</div>
+<p>Therefore:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">==</span></code> means “is equal to?”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=</span></code> means “assign this value” in this context</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;-</span></code> also means “assign this value”</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">=</span></code> operator is also commonly used to provide named arguments in function calls:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">round</span><span class="p">(</span><span class="m">3.14159</span><span class="p">,</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">digits</span> <span class="pre">=</span> <span class="pre">2</span></code> does not assign a new object called <code class="docutils literal notranslate"><span class="pre">digits</span></code>; it supplies <code class="docutils literal notranslate"><span class="pre">2</span></code> as the <code class="docutils literal notranslate"><span class="pre">digits</span></code> argument to <code class="docutils literal notranslate"><span class="pre">round()</span></code>.</p>
+</div>
+</section>
+<section id="logic-as-a-filter">
+<h2>Logic as a filter<a class="headerlink" href="#logic-as-a-filter" title="Link to this heading">#</a></h2>
+<p>Logical tests are particularly useful for extracting data. Suppose we want to create a new vector containing only ages greater than 67. As we saw above, we can compare each value in <code class="docutils literal notranslate"><span class="pre">ages</span></code> with 67:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">67</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE  TRUE FALSE FALSE 
+</pre></div>
+</div>
+<p>The result is a logical vector containing one <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> or <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> value for each element of <code class="docutils literal notranslate"><span class="pre">ages</span></code>. We can use this logical vector as a <strong>filter</strong> or <strong>mask</strong> to select values:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">retired</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ages</span><span class="p">[</span><span class="n">ages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">67</span><span class="p">]</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">retired</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] 68 71
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">ages</span> <span class="pre">&gt;</span> <span class="pre">67</span></code> produces the logical vector used inside the square brackets. R keeps the values of <code class="docutils literal notranslate"><span class="pre">ages</span></code> corresponding to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> and excludes the values corresponding to <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>. The selected values are then assigned to the new vector, <code class="docutils literal notranslate"><span class="pre">retired</span></code>.</p>
+<p>In other words:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">ages</span><span class="p">[</span><span class="n">ages</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="m">67</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>means “return the elements of <code class="docutils literal notranslate"><span class="pre">ages</span></code> for which <code class="docutils literal notranslate"><span class="pre">ages</span> <span class="pre">&gt;</span> <span class="pre">67</span></code> is <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>.”</p>
+</section>
+<section id="missing-values">
+<h2>Missing values<a class="headerlink" href="#missing-values" title="Link to this heading">#</a></h2>
+<p>Dealing with missing values is a recurring theme in R and data analysis more generally. Most real-world datasets contain missing values, and R requires us to handle them explicitly.</p>
+<p>What happens when we perform a logical comparison on a vector that contains missing values? Here is some hypothetical temperature data. Suppose we want to identify values below freezing:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">-10</span><span class="p">,</span><span class="w"> </span><span class="m">-8</span><span class="p">,</span><span class="w"> </span><span class="m">-4</span><span class="p">,</span><span class="w"> </span><span class="m">0</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">,</span><span class="w"> </span><span class="m">2</span><span class="p">,</span><span class="w"> </span><span class="m">4</span><span class="p">,</span><span class="w"> </span><span class="m">8</span><span class="p">,</span><span class="w"> </span><span class="m">12</span><span class="p">,</span><span class="w"> </span><span class="kc">NA</span><span class="p">)</span>
+
+<span class="n">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [1]  TRUE  TRUE  TRUE FALSE FALSE    NA FALSE FALSE FALSE FALSE    NA
+</pre></div>
+</div>
+<p>The comparison returns <code class="docutils literal notranslate"><span class="pre">NA</span></code> for the missing values because R cannot determine whether an unknown temperature is below zero.</p>
+<p>What happens when we use this result as a logical filter?</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">freezing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temperature</span><span class="p">[</span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">freezing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] -10  -8  -4  NA  NA
+</pre></div>
+</div>
+<p>The missing values are included in the new <code class="docutils literal notranslate"><span class="pre">freezing</span></code> vector. This happens because the logical filter contains <code class="docutils literal notranslate"><span class="pre">NA</span></code> values, and R cannot determine whether the corresponding elements should be included or excluded.</p>
+<p>The same issue would occur if we created a vector of temperatures at or above freezing:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">aboveFreezing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temperature</span><span class="p">[</span><span class="n">temperature</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="m">0</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">aboveFreezing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1]  0  2 NA  2  4  8 12 NA
+</pre></div>
+</div>
+<p>The missing values are included here too. This is usually not what we want, so we should identify missing values and deal with them explicitly.</p>
+<p>A useful function for this purpose is <code class="docutils literal notranslate"><span class="pre">is.na()</span></code>. It checks whether each element of an object is <code class="docutils literal notranslate"><span class="pre">NA</span></code>:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="nf">is.na</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span> [1] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE  TRUE
+</pre></div>
+</div>
+<p>The result is a logical vector containing <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> for each missing value and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> for each non-missing value.</p>
+<p>We can now create a filter that selects values that are both not missing and below zero:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="n">freezing</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">temperature</span><span class="p">[</span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span><span class="p">]</span>
+
+<span class="nf">print</span><span class="p">(</span><span class="n">freezing</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[1] -10  -8  -4
+</pre></div>
+</div>
+<p>Let’s unpack this condition:</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">temperature</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+<p>In English, this means:</p>
+<blockquote>
+<div><p>Select values that are not missing and are below zero.</p>
+</div></blockquote>
+<p>The first part,</p>
+<div class="highlight-r notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="nf">is.na</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>identifies values that are not <code class="docutils literal notranslate"><span class="pre">NA</span></code>. The function <code class="docutils literal notranslate"><span class="pre">is.na()</span></code> returns <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> for missing values, so the <code class="docutils literal notranslate"><span class="pre">!</span></code> operator reverses those results: <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> becomes <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, and <code class="docutils literal notranslate"><span class="pre">FALSE</span></code> becomes <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">&amp;</span></code> operator means that both conditions must be <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>:</p>
+<ol class="arabic simple">
+<li><p>The value is not missing.</p></li>
+<li><p>The value is below zero.</p></li>
+</ol>
+<p>We then place this logical condition inside square brackets to tell R which elements of <code class="docutils literal notranslate"><span class="pre">temperature</span></code> to extract.</p>
+<p>Don’t worry if this isn’t immediately intuitive, R is primarily learned through writing code and fixing errors. In other words, it takes practice.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "r"
+        },
+        kernelOptions: {
+            name: "ir",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'ir'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="1.Vectors-Indices.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Vectors and Indices</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="3.Data-Frames.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Data frames</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item"><div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logical-operators">Logical operators</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#logic-as-a-filter">Logic as a filter</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-values">Missing values</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dr George Farmer & Dr Martyn McFarquhar
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2026.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
